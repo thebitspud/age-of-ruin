@@ -4,14 +4,18 @@ body {
 	margin: 1vh 1vw;
 	text-align: center;
 	
-	background-color: white;
-	color: white;
+	background-color: #ccc;
+	color: black;
 	font-family: monospace;
 	font-size: 14px;
 }
 
-div { text-align: left; }
-hr { border: 0.5px solid #222222; }
+div {
+	text-align: left;
+	background-color: white;
+}
+
+hr { border: 0.5px solid #444; }
 P { margin: 0; }
 
 /* Default button settings */
@@ -38,14 +42,14 @@ button:focus { outline: none; }
 button.option {
 	background: white;
 	color: black;
-	border: 1px #888888 solid;
+	border: 1px #888 solid;
 	
 	padding: 4px 8px;
 	height: auto;
 	margin: 0 5px 5px 0;
 }
 
-button.option:hover { background-color: #cccccc; }
+button.option:hover { background-color: #ccc; }
 button.option:active { opacity: 0.8; }
 
 /* Division sizing and settings */
@@ -53,42 +57,42 @@ button.option:active { opacity: 0.8; }
 div.disp-side {
 	display: inline-block;
 	vertical-align: top;
+	background-color: #ccc;
 
 	width: 20vw;
-	min-width: 200px;
+	min-width: 250px;
 	height: 97vh;
-	min-height: 450px;
+	min-height: 410px;
 }
 
 div#events {
 	display: inline-block;
 
 	padding: 0 10px 10px 10px;
-	width: auto;
-	min-width: 400px;
+	width: calc(50vw - 60px);
+	min-width: 250px;
 	height: calc(97vh - 10px);
 	min-height: 400px;
 }
 
-div.disp-side div, div#events {
-	outline: 1px solid lightslategray;
-	overflow: auto;
-}
+div.disp-side div, div#events { outline: 2px solid #555; }
 
 div.disp-side div {
 	width: auto;
 	height: calc(50% - 25px);
-	min-height: 200px;
 	padding: 10px;
 }
 
-div div:first-child { margin-bottom: 10px; }
+div.disp-side div:first-child { margin-bottom: 10px; }
 
 /* Project utilities */
 
-p.center { text-align: center; }
+p.header {
+	text-align: center;
+	margin-top: 5px;
+}
 
-hr.light {
-	border-color: #333333;
+hr.header {
+	border: 1px solid #555;
 	margin: 15px 0;
 }
