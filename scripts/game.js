@@ -1,8 +1,14 @@
-var addHeader = function(title) {
-	return `<p class="header">${title}</p><hr class="header">`
-}
+$(document).ready(function() {
+	displayStats();
+	displayInventory();
+	$('#actions').append(addHeader('SPELLS'));
+	$('#inspect').append(addHeader('INFO'));
 
-$('#stats').append(addHeader('STATS'));
-$('#actions').append(addHeader('SPELLS'));
-$('#inspect').append(addHeader('INFO'));
-$('#inventory').append(addHeader('INVENTORY'));
+	playEvent(events['intro-0']);
+
+	/*
+
+	displayActions();
+
+	*/
+});
