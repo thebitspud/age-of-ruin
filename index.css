@@ -15,7 +15,8 @@ div {
 	background-color: white;
 }
 
-hr { border: 0.5px solid #444; }
+hr { border: 1px #444 solid; }
+
 P { margin: 0; }
 
 /* Default button settings */
@@ -31,7 +32,7 @@ button {
 	height: min-content;
 	background: inherit;
 	border: none;
-	padding: 0px 0px;
+	padding: 0 0;
 }
 
 button:active { opacity: 0.3; }
@@ -75,8 +76,9 @@ div#events {
 }
 
 div.disp-side div, div#events {
-	outline: 2px solid #555;
+	outline: 1px solid #555;
 	padding: 10px;
+	overflow: auto;
 }
 
 div.disp-side div {
