@@ -15,7 +15,7 @@ let pickUpItemPrompt = function(event, item) {
 
 const events = {
 	'intro-0': {
-		'info': 'You wake up and open your eyes.',
+		'info': '-cYou wake up and open your eyes.',
 		'options': addEventToggle('intro-1', 'Continue')
 	},
 
@@ -36,7 +36,7 @@ const events = {
 
 	'intro-4': {
 		'info': 'You spot a small dagger lying on the ground.',
-		'options': pickUpItemPrompt('intro-5', 'blunt-dagger')
+		'options': addButton(`pickUpSuccess('intro-5', 'blunt-dagger')`, 'Pick Up')
 	},
 
 	'intro-5': {
@@ -45,12 +45,27 @@ const events = {
 	},
 
 	'forest-0': {
-		'info': 'You approach the monumental forest, peering into the dark expanse beneath the canopy.',
-		'options': addEventToggle('road-0', 'To the Road')
+		'info': '-cYou cautiously approach the monumental forest, peering into the dark expanse beneath the canopy.',
+		'options': addEventToggle('forest-1', 'Inspect Area')
+	},
+
+	'forest-1': {
+		'info': 'You spot some bright red berries growing on a nearby shrub.',
+		'options': pickUpItemPrompt('forest-2', 'berries')
+	},
+
+	'forest-2': {
+		'info': 'There appears to be nothing else of value in the region.<br><br>You are about to turn around and head for the road when you spot a glinting object amongst the towering woods.',
+		'options': addEventToggle('forest-3', 'Into the Forest') + addEventToggle('road-0', 'To the Road')
+	},
+
+	'forest-3': {
+		'info': 'There appears to be nothing else of value in the region.<br><br>You are about to turn around and head for the road when you spot a glinting object amongst the towering woods.',
+		'options': addEventToggle('forest-3', 'Into the Forest') + addEventToggle('road-0', 'To the Road')
 	},
 
 	'road-0': {
-		'info': '',
+		'info': '-cIn both directions, the winding path streches on as far as you can see. Occasional bunches of wild grasses starkly contrast the monotonous gravel of the road that surrounds them.',
 		'options': addEventToggle('road-0', 'To the Road')
 	}
 };
@@ -58,7 +73,15 @@ const events = {
 // Activating an event
 
 function playEvent(event) {
-	$('#info').append(event.info + '<br><br>');
+	$info = $('#info');
+	evtInfo = event.info;
+	
+	if(evtInfo.startsWith('-c')) {
+		$info.empty();
+		evtInfo = evtInfo.substr(2);
+	}
+
+	$info.append(evtInfo + '<br><br>');
 	$('#options').empty()
 		.append(event.options);
 }

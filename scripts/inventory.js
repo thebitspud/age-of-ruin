@@ -1,23 +1,3 @@
-// Returns a clickable item link
-
-let itemLink = function(item) {
-	return `<button style="color: green" onClick="inspectItem('${item.name}')">${item.name}</button>`;
-}
-
-// Displays information about an item in HTML
-
-function inspectItem(title) {
-	let item = items['error'];
-
-	for(let i = 0; i < Object.keys(inventory).length; i++)
-		if(Object.values(inventory)[i].name === title) item = Object.values(inventory)[i];
-
-	$('#inspect').empty()
-		.append(addHeader('INFO'))
-		.append(`${item.name}<br><br>`)
-		.append(`${item.desc}`);
-}
-
 // A preconstructed list of all the obtainable items in the game
 
 const items = {
@@ -44,8 +24,8 @@ const items = {
 	},
 	'healing-salve': {
 		'type': 'consumable',
-		'name': 'Rope',
-		'weight': 1,
+		'name': 'Healing Salve',
+		'weight': 2,
 		'desc': 'A potent herbal blend that can disinfect and heal lesser wounds in no time.',
 		'effect': '+15 HP'
 	},
@@ -61,6 +41,12 @@ const items = {
 // A list of all the items the player currently possesses
 
 let inventory = [];
+
+// Returns a clickable item link
+
+let itemLink = function(item) {
+	return `<button style="color: green" onClick="inspectItem('${item.name}')">${item.name}</button>`;
+}
 
 // Displaying inventory contents in HTML
 
@@ -92,4 +78,23 @@ function acquireItem(item) {
 	inventory.push(item);
 	$('#info').append(`Acquired ${itemLink(item)}<br><br>`);
 	displayInventory();
+}
+
+// Displays information about an item in HTML
+
+function inspectItem(title) {
+	let item = items['error'];
+
+	for(let i = 0; i < Object.keys(items).length; i++)
+		if(Object.values(items)[i].name === title) item = Object.values(items)[i];
+
+	$inspect = $('#inspect');
+
+	$inspect.empty()
+		.append(addHeader('INFO'))
+		.append(`<p style="color: green; text-align: center">${item.name}</p>`)
+		.append(`<br>${item.desc}`)
+		.append(`<br><br>Weight: ${item.weight}`);
+
+	if(item.type === 'weapon') $inspect.append(`<br>Damage: ${item.damage}`)
 }
