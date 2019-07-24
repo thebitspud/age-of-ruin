@@ -21,22 +21,24 @@ P { margin: 0; }
 
 /* Default button settings */
 
-button {
+a, button {
 	font-family: monospace;
 	font-size: 14px;
 	transition-duration: 0.1s;
 	text-decoration: none;
 	cursor: pointer;
+	opacity: 1;
 	
 	width: auto;
 	height: min-content;
 	background: inherit;
 	border: none;
 	padding: 0 0;
+	outline: none;
 }
 
-button:active { opacity: 0.3; }
-button:focus { outline: none; }
+a:hover, button:hover { opacity: 0.7; }
+a:active, button:active { opacity: 0.5; }
 
 /* Button variants */
 
@@ -50,8 +52,15 @@ button.option {
 	margin: 0 5px 5px 0;
 }
 
-button.option:hover { background-color: #ddd; }
-button.option:active { opacity: 0.8; }
+button.option:hover {
+	opacity: 1;
+	background-color: #ddd;
+}
+
+button.option:active {
+	opacity: 1;
+	background-color: #bbb;
+}
 
 /* Division sizing and settings */
 
