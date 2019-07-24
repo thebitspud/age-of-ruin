@@ -40,7 +40,7 @@ const items = {
 		'type': 'debug',
 		'name': 'Missing Item',
 		'weight': 0,
-		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank'>the developer.</a>"
+		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer.</a>"
 	},
 	'healing-salve': {
 		'type': 'consumable',
