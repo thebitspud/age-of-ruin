@@ -1,4 +1,5 @@
-/* Method Expressions */
+
+/* Game */
 
 // Returns an HTML header with the specified title
 
@@ -12,21 +13,46 @@ let addButton = function (args, text) {
 	return `<button class="option" onclick="${args}">${text}</button>`;
 };
 
-// Returns an HTML button that executes a specified event
+// Begins the game once the script is loaded
 
-let addEvent = function (event, text) {
-	addButton(playEvent(events['${event}']), text);
+$(function() { // shorthand for $(document).ready
+	displayStats();
+	displayInventory();
+	$('#history').append(addHeader('HISTORY'));
+	$('#inspect').append(addHeader('INFO'));
+
+	playEvent(events['intro-0']);
+});
+
+
+
+/* Inventory */
+
+const items = {
+	'berries': {
+		'type': ['food'],
+		'name': 'Unknown Berries',
+		'weight': 2
+	},
+	'rope': {
+		'type': ['crafting'],
+		'name': 'Rope',
+		'weight': 1
+	},
+	'small-backpack': {
+		'type': ['clothing'],
+		'name': 'Small Backpack',
+		'weight': 8
+	},
+	'blunt-dagger': {
+		'type': ['weapon'],
+		'name': 'Blunt Dagger',
+		'weight': 3,
+		'damage': 6
+	}
 };
 
-/* Method Statements */
-
-function displayStats() {
-	$('#stats').empty()
-		.append(addHeader('STATS'))
-		.append(`Health : ${stats['health'].now} / ${stats['health'].max}`)
-		.append(`<br>Energy : ${stats['energy'].now} / ${stats['energy'].max}`)
-		.append(`<br>Weight : ${stats['weight'].now} / ${stats['weight'].max}`);
-}
+let inventory = [];
 
 function displayInventory() {
 	let $inventory = $('#inventory');
@@ -56,42 +82,7 @@ function acquireItem(item) {
 	displayInventory();
 }
 
-function playEvent(event) {
-	$('#info').append(event.info + '<br><br>');
-	$('#options').html(event.options);
-}
-
-// noinspection JSUnusedGlobalSymbols
-function pickUpItemPrompt(event, item) {
-	$('#options').html(addEvent(`${event}`, 'Continue'));
-	acquireItem(items[`${item}`]);
-}
-
-/* Data */
-
-const items = {
-	'berries': {
-		'type': ['food'],
-		'name': 'Unknown Berries',
-		'weight': 2
-	},
-	'rope': {
-		'type': ['crafting'],
-		'name': 'Rope',
-		'weight': 1
-	},
-	'small-backpack': {
-		'type': ['clothing'],
-		'name': 'Small Backpack',
-		'weight': 8
-	},
-	'blunt-dagger': {
-		'type': ['weapon'],
-		'name': 'Blunt Dagger',
-		'weight': 3,
-		'damage': 6
-	}
-};
+/* Stats */
 
 const stats = {
 	health: {
@@ -132,25 +123,43 @@ const stats = {
 	}
 };
 
+function displayStats() {
+	$('#stats').empty()
+		.append(addHeader('STATS'))
+		.append(`Health : ${stats['health'].now} / ${stats['health'].max}`)
+		.append(`<br>Energy : ${stats['energy'].now} / ${stats['energy'].max}`)
+		.append(`<br>Weight : ${stats['weight'].now} / ${stats['weight'].max}`);
+}
+
+
+
+/* Events */
+
+// Returns an HTML button that executes a specified event
+
+let addEventToggle = function (event, text) {
+	return addButton(`playEvent(events['${event}'])`, text);
+};
+
 const events = {
 	'intro-0': {
 		'info': 'You wake up and open your eyes.',
-		'options': addEvent('intro-1', 'Continue')
+		'options': addEventToggle('intro-1', 'Continue')
 	},
 
 	'intro-1': {
 		'info': `The ground you lie on is cold and uneven, but you can't help but admire the countless stars dotting the night sky above you.`,
-		'options': addEvent('intro-2', 'Continue')
+		'options': addEventToggle('intro-2', 'Continue')
 	},
 
 	'intro-2': {
 		'info': 'You sit up and look around, surveying the unfamiliar landscape.',
-		'options': addEvent('intro-3', 'Continue')
+		'options': addEventToggle('intro-3', 'Continue')
 	},
 
 	'intro-3': {
 		'info': 'You can barely see the light of dawn off in the distance. Although it is still dark out, you can tell that you are in an unkempt grassy field. You do not know where you are or how you got here.',
-		'options': addEvent('intro-4', 'Inspect Area')
+		'options': addEventToggle('intro-4', 'Inspect Area')
 	},
 
 	'intro-4': {
@@ -160,29 +169,26 @@ const events = {
 
 	'intro-5': {
 		'info': 'There appears to be nothing else of value in the region. Moving out of this area would be a good idea.<br><br>Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
-		'options': addEvent('forest-0', 'To the Forest') + addEvent('road-0', 'To the Road')
+		'options': addEventToggle('forest-0', 'To the Forest') + addEventToggle('road-0', 'To the Road')
 	},
 
 	'forest-0': {
 		'info': 'You approach the monumental forest, peering into the dark expanse beneath the canopy.',
-		'options': addEvent('road-0', 'To the Road')
+		'options': addEventToggle('road-0', 'To the Road')
 	},
 
 	'road-0': {
 		'info': '',
-		'options': addEvent('road-0', 'To the Road')
+		'options': addEventToggle('road-0', 'To the Road')
 	}
 };
 
-let inventory = [];
+function playEvent(event) {
+	$('#info').append(event.info + '<br><br>');
+	$('#options').html(event.options);
+}
 
-// Begins the game once the script is loaded
-
-$(function() { // shorthand for $(document).ready
-	displayStats();
-	displayInventory();
-	$('#history').append(addHeader('HISTORY'));
-	$('#inspect').append(addHeader('INFO'));
-
-	playEvent(events['intro-0']);
-});
+function pickUpItemPrompt(event, item) {
+	$('#options').html(addEventToggle(`${event}`, 'Continue'));
+	acquireItem(items[`${item}`]);
+}
