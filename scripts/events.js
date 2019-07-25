@@ -50,23 +50,38 @@ const events = {
 	},
 
 	'forest-1': {
-		'info': 'You spot some bright red berries growing on a nearby shrub.',
+		'info': 'Along the edge of the forest, you spot some bright red berries growing on a nearby shrub.',
 		'options': pickUpItemPrompt('forest-2', 'berries')
 	},
 
 	'forest-2': {
-		'info': 'There appears to be nothing else of value in the region.<br><br>You are about to turn around and head for the road when you spot a glinting object amongst the towering woods.',
+		'info': 'There appears to be nothing else of value in the region.<br><br>You are about to turn around and head for the road when you spot a glinting object amongst the towering trees.',
 		'options': addEventToggle('forest-3', 'Into the Forest') + addEventToggle('road-0', 'To the Road')
 	},
 
 	'forest-3': {
-		'info': 'There appears to be nothing else of value in the region.<br><br>You are about to turn around and head for the road when you spot a glinting object amongst the towering woods.',
-		'options': addEventToggle('forest-3', 'Into the Forest') + addEventToggle('road-0', 'To the Road')
+		'info': 'You warily advance towards the object that caught your attention. Upon further inspection, it appears to be some sort of coin-shaped talisman.',
+		'options': pickUpItemPrompt('forest-4', 'tali-life')
+	},
+
+	'forest-4': {
+		'info': 'There appears to be nothing else of value in the region.<br><br>Heading back to the road would be a good idea.',
+		'options': addEventToggle('road-0', 'To the Road')
 	},
 
 	'road-0': {
-		'info': '-cIn both directions, the winding path streches on as far as you can see. Occasional bunches of wild grasses starkly contrast the monotonous gravel of the road that surrounds them.',
-		'options': addEventToggle('road-0', 'To the Road')
+		'info': '-cOccasional bunches of wild grasses starkly contrast the monotonous gravel of the road that surrounds them. In both directions, the winding path streches on as far as you can see.',
+		'options': addEventToggle('e-road-0', 'Turn Left') + addEventToggle('w-road-0', 'Turn Right')
+	},
+
+	'e-road-0': {
+		'info': 'You turn left',
+		'options': addEventToggle('e-road-0', 'Turn Left') + addEventToggle('w-road-0', 'Turn Right')
+	},
+
+	'w-road-0': {
+		'info': 'You turn right',
+		'options': addEventToggle('e-road-0', 'Turn Left') + addEventToggle('w-road-0', 'Turn Right')
 	}
 };
 

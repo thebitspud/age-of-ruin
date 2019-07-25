@@ -6,35 +6,54 @@ const items = {
 		'name': 'Berries',
 		'weight': 2,
 		'desc': 'A fistful of edible berries that can be eaten to restore some health.',
-		'effect': '+7 HP'
+		'effect': '+7 HP over 15s'
 	},
+
 	'blunt-dagger': {
 		'type': 'weapon',
 		'name': 'Blunt Dagger',
 		'weight': 3,
-		'desc': "A small but functional dagger that has been used many times in the past. Perhaps it would be of greater use if sharpened.",
+		'desc': "A small but functional dagger that has been used many times in the past.",
 		'damage': 6,
 		'size': 'secondary'
 	},
+
 	'error': {
 		'type': 'debug',
 		'name': 'Missing Item',
 		'weight': 0,
 		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer.</a>"
 	},
+
 	'healing-salve': {
 		'type': 'consumable',
 		'name': 'Healing Salve',
 		'weight': 2,
 		'desc': 'A potent herbal blend that can disinfect and heal lesser wounds in no time.',
-		'effect': '+15 HP'
+		'effect': '+15 HP over 10s'
 	},
-	'small-backpack': {
+
+	'none': {
+		'type': 'debug',
+		'name': 'None',
+		'weight': 0,
+		'desc': "You were not supposed to be able to access this item. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer.</a>"
+	},
+
+	'small-pack': {
 		'type': 'equipable',
 		'name': 'Small Backpack',
 		'weight': 8,
 		'desc': 'A small pack that can be worn to increase your inventory weight cap.',
-		'section': 'back'
+		'section': 'Back'
+	},
+
+	'tali-life': {
+		'type': 'accessory',
+		'name': 'Talisman of Life',
+		'weight': 3,
+		'desc': "This golden artifact is covered with strange inscriptions. When held, it radiates a pleasant energy.",
+		'effect': "+1 HP every 3s"
 	},
 };
 
@@ -65,15 +84,17 @@ function displayInventory() {
 		weight += Object.values(inventory)[i].weight;
 	}
 
-	if(backpack) stats.weight.max = 100;
-	stats.weight.now = weight;
-	displayStats();
+	if(backpack) player.weight.max = 100;
+	player.weight.now = weight;
+	displayPlayer();
 }
 
 // Adding items to the player's inventory
 
 function acquireItem(item) {
-	if(item.weight + stats.weight.now > stats.weight.max) return;
+	if(item.weight + player.weight.now > player.weight.max) return;
+
+	if(player.primary === 'None' && item.type === 'weapon') player.primary = itemLink(item);
 
 	inventory.push(item);
 	$('#info').append(`Acquired ${itemLink(item)}<br><br>`);
@@ -96,5 +117,16 @@ function inspectItem(title) {
 		.append(`<br>${item.desc}`)
 		.append(`<br><br>Weight: ${item.weight}`);
 
-	if(item.type === 'weapon') $inspect.append(`<br>Damage: ${item.damage}`)
+	switch(item.type) {
+		case 'weapon':
+			$inspect.append(`<br>Damage: ${item.damage}`);
+			break;
+		case 'consumable':
+		case 'accessory':
+			$inspect.append(`<br>Effect: ${item.effect}`)
+			break;
+		case 'equipable':
+			$inspect.append(`<br>Section: ${item.section}`)
+			break;
+	}
 }

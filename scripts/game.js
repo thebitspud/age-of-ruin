@@ -13,7 +13,7 @@ let addButton = function(args, text) {
 // Begins the game once the script is loaded
 
 $(function() { // shorthand for $(document).ready
-	displayStats();
+	displayPlayer();
 	displayInventory();
 	$('#history').append(addHeader('HISTORY'));
 	$('#inspect').append(addHeader('INFO'));

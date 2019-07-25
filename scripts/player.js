@@ -1,6 +1,6 @@
 // The player's current stats
 
-const stats = {
+const player = {
 	'health': {
 		'max': 100,
 		'min': 0,
@@ -44,12 +44,12 @@ const stats = {
 
 // Displaying current stats in HTML
 
-function displayStats() {
-	$('#stats').empty()
-		.append(addHeader('STATS'))
-		.append(`Health : ${stats.health.now} / ${stats.health.max}`)
-		.append(`<br>Energy : ${stats.energy.now} / ${stats.energy.max}`)
-		.append(`<br>Weight : ${stats.weight.now} / ${stats.weight.max}`)
-		.append(`<br><br>Primary : ${stats.primary}`)
-		.append(`<br>Secondary : ${stats.secondary}`);
+function displayPlayer() {
+	$('#player').empty()
+		.append(addHeader('PLAYER'))
+		.append(`Health : ${player.health.now} / ${player.health.max}`)
+		.append(`<br>Energy : ${player.energy.now} / ${player.energy.max}`)
+		.append(`<br>Weight : ${player.weight.now} / ${player.weight.max}`)
+		.append(`<br><br>Primary : ${player.primary}`)
+		.append(`<br>Secondary : ${player.secondary}`);
 }
