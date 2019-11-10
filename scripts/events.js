@@ -8,6 +8,7 @@ let addEventToggle = function (event, text) {
 
 let pickUpItemPrompt = function(event, item) {
 	return addButton(`pickUpSuccess('${event}', '${item}')`, 'Pick Up')
+	+ addButton(`inspectItem('${item}')`, 'Inspect')
 	+ addButton(`discardItem('${event}', '${item}')`, 'Discard');
 }
 
@@ -30,17 +31,22 @@ const events = {
 	},
 
 	'intro-3': {
-		'info': 'You can barely see the light of dawn off in the distance. Although it is still dark out, you can tell that you are in an unkempt grassy field. You do not know where you are or how you got here.',
+		'info': 'You can barely see the light of dawn off in the distance. Though it is still dark out, you can tell that you are in an unkempt grassy field. You do not know where you are or how you got here.',
 		'options': addEventToggle('intro-4', 'Inspect Area')
 	},
 
 	'intro-4': {
 		'info': 'You spot a small dagger lying on the ground.',
-		'options': addButton(`pickUpSuccess('intro-5', 'blunt-dagger')`, 'Pick Up')
+		'options': addButton(`pickUpSuccess('intro-5', 'blunt-dagger')`, 'Pick Up') + addButton(`inspectItem('blunt-dagger')`, 'Inspect')
 	},
 
 	'intro-5': {
-		'info': 'There appears to be nothing else of value in the region. Moving out of this area would be a good idea.<br><br>Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
+		'info': 'There appears to be nothing else of value in the region. Moving out of this area would be a good idea.',
+		'options': addEventToggle('intro-6', 'Continue')
+	},
+
+	'intro-6': {
+		'info': 'Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
 		'options': addEventToggle('forest-0', 'To the Forest') + addEventToggle('road-0', 'To the Road')
 	},
 
@@ -55,8 +61,8 @@ const events = {
 	},
 
 	'forest-2': {
-		'info': 'There appears to be nothing else of value in the region.<br><br>You are about to turn around and head for the road when you spot a glinting object amongst the towering trees.',
-		'options': addEventToggle('forest-3', 'Into the Forest') + addEventToggle('road-0', 'To the Road')
+		'info': 'You are about to turn around and head for the road when a sudden glint of light in the undergrowth catches your eye.',
+		'options': addEventToggle('forest-3', 'Inspect Area') + addEventToggle('road-0', 'To the Road')
 	},
 
 	'forest-3': {
@@ -65,7 +71,7 @@ const events = {
 	},
 
 	'forest-4': {
-		'info': 'There appears to be nothing else of value in the region.<br><br>Heading back to the road would be a good idea.',
+		'info': 'There appears to be nothing else of value in the region.',
 		'options': addEventToggle('road-0', 'To the Road')
 	},
 
@@ -106,13 +112,13 @@ function playEvent(event) {
 function pickUpSuccess(event, item) {
 	$('#options').empty()
 		.append(addEventToggle(event, 'Continue'));
-	acquireItem(items[item]);
+	acquireItem(item);
 }
 
 // Discarding an item
 
 function discardItem(event, item) {
-	$('#info').append(`<span style="color: red">Discarded</span> ${itemLink(items[item])}<br><br>`);
+	$('#info').append(`<span style="color: red">Discarded</span> ${itemLink(item)}<br><br>`);
 	$('#options').empty()
 		.append(addEventToggle(event, 'Continue'));
 }

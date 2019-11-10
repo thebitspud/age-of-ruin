@@ -14,7 +14,8 @@ const items = {
 		'name': 'Blunt Dagger',
 		'weight': 3,
 		'desc': "A small but functional dagger that has been used many times in the past.",
-		'damage': 6,
+		'atk_damage': 6,
+		'atk_speed': 1.0,
 		'size': 'secondary'
 	},
 
@@ -22,7 +23,7 @@ const items = {
 		'type': 'debug',
 		'name': 'Missing Item',
 		'weight': 0,
-		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer.</a>"
+		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer</a>."
 	},
 
 	'healing-salve': {
@@ -31,13 +32,6 @@ const items = {
 		'weight': 2,
 		'desc': 'A potent herbal blend that can disinfect and heal lesser wounds in no time.',
 		'effect': '+15 HP over 10s'
-	},
-
-	'none': {
-		'type': 'debug',
-		'name': 'None',
-		'weight': 0,
-		'desc': "You were not supposed to be able to access this item. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer.</a>"
 	},
 
 	'small-pack': {
@@ -52,8 +46,8 @@ const items = {
 		'type': 'accessory',
 		'name': 'Talisman of Life',
 		'weight': 3,
-		'desc': "This golden artifact is covered with strange inscriptions. When held, it radiates a pleasant energy.",
-		'effect': "+1 HP every 3s"
+		'desc': 'This golden artifact is covered with strange inscriptions. When held, it radiates a pleasant energy.',
+		'effect': '+1 HP every 3s'
 	},
 };
 
@@ -64,7 +58,7 @@ let inventory = [];
 // Returns a clickable item link
 
 let itemLink = function(item) {
-	return `<button style="color: green" onClick="inspectItem('${item.name}')">${item.name}</button>`;
+	return `<button style="color: green" onClick="inspectItem('${item}')">${items[item].name}</button>`;
 }
 
 // Displaying inventory contents in HTML
@@ -78,10 +72,10 @@ function displayInventory() {
 	let weight = 0;
 	let backpack = false;
 
-	for(let i = 0; i < Object.keys(inventory).length; i++) {
-		$inventory.append(`${itemLink(Object.values(inventory)[i])}<br>`);
-		if(Object.values(inventory)[i].name === 'Small Backpack') backpack = true;
-		weight += Object.values(inventory)[i].weight;
+	for(let i in inventory) {
+		$inventory.append(`${itemLink(inventory[i])}<br>`);
+		if(inventory[i] === 'small-pack') backpack = true;
+		weight += items[inventory[i]].weight;
 	}
 
 	if(backpack) player.weight.max = 100;
@@ -92,9 +86,9 @@ function displayInventory() {
 // Adding items to the player's inventory
 
 function acquireItem(item) {
-	if(item.weight + player.weight.now > player.weight.max) return;
-
-	if(player.primary === 'None' && item.type === 'weapon') player.primary = itemLink(item);
+	itemObj = items[item];
+	if(itemObj.weight + player.weight.now > player.weight.max) return;
+	if(player.primary === 'None' && itemObj.type === 'weapon') player.primary = itemLink(item);
 
 	inventory.push(item);
 	$('#info').append(`Acquired ${itemLink(item)}<br><br>`);
@@ -103,30 +97,35 @@ function acquireItem(item) {
 
 // Displays information about an item in HTML
 
-function inspectItem(title) {
-	let item = items['error'];
+function inspectItem(item) {
+	let itemObj = items['error'];
 
-	for(let i = 0; i < Object.keys(items).length; i++)
-		if(Object.values(items)[i].name === title) item = Object.values(items)[i];
+	for(let i = 0; i < Object.keys(items).length; i++) {
+		if(Object.keys(items)[i] === item) {
+			itemObj = Object.values(items)[i];
+			break;
+		}
+	}
 
 	$inspect = $('#inspect');
 
 	$inspect.empty()
 		.append(addHeader('INFO'))
-		.append(`<p style="color: green; text-align: center">${item.name}</p>`)
-		.append(`<br>${item.desc}`)
-		.append(`<br><br>Weight: ${item.weight}`);
+		.append(`<p style="color: green; text-align: center">${itemObj.name}</p>`)
+		.append(`<br>${itemObj.desc}`)
+		.append(`<br><br>Weight: ${itemObj.weight}`);
 
-	switch(item.type) {
+	switch(itemObj.type) {
 		case 'weapon':
-			$inspect.append(`<br>Damage: ${item.damage}`);
+			$inspect.append(`<br>Damage: ${itemObj.atk_damage}`);
+			$inspect.append(`<br>Use Speed: ${itemObj.atk_speed}`);
 			break;
 		case 'consumable':
 		case 'accessory':
-			$inspect.append(`<br>Effect: ${item.effect}`)
+			$inspect.append(`<br>Effect: ${itemObj.effect}`)
 			break;
 		case 'equipable':
-			$inspect.append(`<br>Section: ${item.section}`)
+			$inspect.append(`<br>Section: ${itemObj.section}`)
 			break;
 	}
 }
