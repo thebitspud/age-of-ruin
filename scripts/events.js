@@ -7,9 +7,7 @@ let addEventToggle = function (event, text) {
 // Player decides whether to pick up an item
 
 let pickUpItemPrompt = function(event, item) {
-	return addButton(`pickUpSuccess('${event}', '${item}')`, 'Pick Up')
-	+ addButton(`inspectItem('${item}')`, 'Inspect')
-	+ addButton(`discardItem('${event}', '${item}')`, 'Discard');
+	return addButton(`inspectItem('${item}')`, 'Inspect') + addButton(`pickUpSuccess('${event}', '${item}')`, 'Pick Up') + addButton(`discardItem('${event}', '${item}')`, 'Discard');
 }
 
 // All event dialogue in the game
@@ -21,7 +19,7 @@ const events = {
 	},
 
 	'intro-1': {
-		'info': `The ground you lie on is cold and uneven, but you can't help but admire the countless stars dotting the night sky above you.`,
+		'info': `Though the ground you lie on is cold and uneven, you can't help but admire the countless stars above dotting the clear night sky.`,
 		'options': addEventToggle('intro-2', 'Continue')
 	},
 
@@ -31,22 +29,27 @@ const events = {
 	},
 
 	'intro-3': {
-		'info': 'You can barely see the light of dawn off in the distance. Though it is still dark out, you can tell that you are in an unkempt grassy field. You do not know where you are or how you got here.',
-		'options': addEventToggle('intro-4', 'Inspect Area')
+		'info': 'You can barely see the light of dawn off in the distance. It is still dark out, but you can tell that you are in an unkempt grassy field.',
+		'options': addEventToggle('intro-4', 'Continue')
 	},
 
 	'intro-4': {
-		'info': 'You spot a small dagger lying on the ground.',
-		'options': addButton(`pickUpSuccess('intro-5', 'blunt-dagger')`, 'Pick Up') + addButton(`inspectItem('blunt-dagger')`, 'Inspect')
+		'info': 'You do not know where you are or how you got here.',
+		'options': addEventToggle('intro-5', 'Inspect Area')
 	},
 
 	'intro-5': {
-		'info': 'There appears to be nothing else of value in the region. Moving out of this area would be a good idea.',
-		'options': addEventToggle('intro-6', 'Continue')
+		'info': 'You spot a small dagger lying on the ground.',
+		'options': addButton(`inspectItem('blunt-dagger')`, 'Inspect') + addButton(`pickUpSuccess('intro-6', 'blunt-dagger')`, 'Pick Up')
 	},
 
 	'intro-6': {
-		'info': 'Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
+		'info': 'There appears to be nothing else of value in the region.',
+		'options': addEventToggle('intro-7', 'Continue')
+	},
+
+	'intro-7': {
+		'info': 'Moving out of this area would be a good idea. Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
 		'options': addEventToggle('forest-0', 'To the Forest') + addEventToggle('road-0', 'To the Road')
 	},
 
@@ -71,6 +74,11 @@ const events = {
 	},
 
 	'forest-4': {
+		'info': '-cA giant shadow swoops in from above.',
+		'options': encounterEnemy('forest-5', 'giant-raven')
+	},
+
+	'forest-5': {
 		'info': 'There appears to be nothing else of value in the region.',
 		'options': addEventToggle('road-0', 'To the Road')
 	},
@@ -103,15 +111,13 @@ function playEvent(event) {
 	}
 
 	$info.append(evtInfo + '<br><br>');
-	$('#options').empty()
-		.append(event.options);
+	setOptions(event.options);
 }
 
 // Successfully picking up an item
 
 function pickUpSuccess(event, item) {
-	$('#options').empty()
-		.append(addEventToggle(event, 'Continue'));
+	setOptions(addEventToggle(event, 'Continue'));
 	acquireItem(item);
 }
 
@@ -119,6 +125,5 @@ function pickUpSuccess(event, item) {
 
 function discardItem(event, item) {
 	$('#info').append(`<span style="color: red">Discarded</span> ${itemLink(item)}<br><br>`);
-	$('#options').empty()
-		.append(addEventToggle(event, 'Continue'));
+	setOptions(addEventToggle(event, 'Continue'));
 }

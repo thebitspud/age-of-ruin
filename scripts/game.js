@@ -10,13 +10,19 @@ let addButton = function(args, text) {
 	return `<button class="option" onclick="${args}">${text}</button>`;
 };
 
+// Sets the options available after an event occurs
+
+function setOptions(args) {
+	$('#options').empty().append(args);
+}
+
 // Begins the game once the script is loaded
 
 $(function() { // shorthand for $(document).ready
 	displayPlayer();
 	displayInventory();
 	$('#history').append(addHeader('HISTORY'));
-	$('#inspect').append(addHeader('INFO'));
+	$('#inspect').append(addHeader('INSPECT'));
 
 	playEvent(events['intro-0']);
 });

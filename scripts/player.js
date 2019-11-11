@@ -45,11 +45,18 @@ const player = {
 // Displaying current stats in HTML
 
 function displayPlayer() {
-	$('#player').empty()
+	$player = $('#player');
+	$player.empty()
 		.append(addHeader('PLAYER'))
 		.append(`Health : ${player.health.now} / ${player.health.max}`)
 		.append(`<br>Energy : ${player.energy.now} / ${player.energy.max}`)
-		.append(`<br>Weight : ${player.weight.now} / ${player.weight.max}`)
-		.append(`<br><br>Primary : ${player.primary}`)
-		.append(`<br>Secondary : ${player.secondary}`);
+		.append(`<br>Weight : ${player.weight.now} / ${player.weight.max}`);
+
+	if(player.primary === 'None')
+		$player.append('<br><br>Primary : None');
+	else $player.append(`<br><br>Primary : ${itemLink(player.primary)}`);
+	
+	if(player.secondary === 'None')
+		$player.append('<br>Secondary : None');
+	else $player.append(`<br>Secondary : ${itemLink(player.secondary)}`);
 }

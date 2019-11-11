@@ -88,7 +88,7 @@ function displayInventory() {
 function acquireItem(item) {
 	itemObj = items[item];
 	if(itemObj.weight + player.weight.now > player.weight.max) return;
-	if(player.primary === 'None' && itemObj.type === 'weapon') player.primary = itemLink(item);
+	if(player.primary === 'None' && itemObj.type === 'weapon') player.primary = item;
 
 	inventory.push(item);
 	$('#info').append(`Acquired ${itemLink(item)}<br><br>`);
@@ -110,7 +110,7 @@ function inspectItem(item) {
 	$inspect = $('#inspect');
 
 	$inspect.empty()
-		.append(addHeader('INFO'))
+		.append(addHeader('INSPECT'))
 		.append(`<p style="color: green; text-align: center">${itemObj.name}</p>`)
 		.append(`<br>${itemObj.desc}`)
 		.append(`<br><br>Weight: ${itemObj.weight}`);
