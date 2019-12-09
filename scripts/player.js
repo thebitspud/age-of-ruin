@@ -3,40 +3,17 @@
 const player = {
 	'health': {
 		'max': 100,
-		'min': 0,
 		'now': 100
 	},
 	'energy': {
 		'max': 100,
-		'min': 0,
 		'now': 100
 	},
 	'weight': {
 		'max': 25,
-		'min': 0,
 		'now': 0
 	},
-
-	'str': {
-		'max': 20,
-		'min': 0,
-		'now': 10
-	},
-	'int': {
-		'max': 20,
-		'min': 0,
-		'now': 10
-	},
-	'agi': {
-		'max': 20,
-		'min': 0,
-		'now': 10
-	},
-	'cha': {
-		'max': 20,
-		'min': 0,
-		'now': 10
-	},
+	'def': 0,
 
 	'primary': 'None',
 	'secondary': 'None'

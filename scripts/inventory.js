@@ -13,9 +13,9 @@ const items = {
 		'type': 'weapon',
 		'name': 'Blunt Dagger',
 		'weight': 3,
-		'desc': "A small but functional dagger that has been used many times in the past.",
-		'atk_damage': 6,
-		'atk_speed': 1.0,
+		'desc': "A worn but functional dagger with a dull blade. It would be more useful if sharpened.",
+		'atk_dmg': 6,
+		'atk_rate': 1.0,
 		'size': 'secondary'
 	},
 
@@ -26,11 +26,11 @@ const items = {
 		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer</a>."
 	},
 
-	'healing-salve': {
+	'heal-salve': {
 		'type': 'consumable',
 		'name': 'Healing Salve',
 		'weight': 2,
-		'desc': 'A potent herbal blend that can disinfect and heal lesser wounds in no time.',
+		'desc': 'A potent herbal blend that can disinfect and heal lesser wound.',
 		'effect': '+15 HP over 10s'
 	},
 
@@ -46,7 +46,7 @@ const items = {
 		'type': 'accessory',
 		'name': 'Talisman of Life',
 		'weight': 3,
-		'desc': 'This golden artifact is covered with strange inscriptions. When held, it radiates a pleasant energy.',
+		'desc': 'A golden artifact covered with strange inscriptions. When held, it radiates a pleasant energy.',
 		'effect': '+1 HP every 3s'
 	},
 };
@@ -117,8 +117,8 @@ function inspectItem(item) {
 
 	switch(itemObj.type) {
 		case 'weapon':
-			$inspect.append(`<br>Damage: ${itemObj.atk_damage}`);
-			$inspect.append(`<br>Use Speed: ${itemObj.atk_speed}`);
+			$inspect.append(`<br>Attack Damage: ${itemObj.atk_dmg}`);
+			$inspect.append(`<br>Attack Cooldown: ${itemObj.atk_rate.toFixed(1)}s`);
 			break;
 		case 'consumable':
 		case 'accessory':

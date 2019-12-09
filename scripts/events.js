@@ -1,7 +1,7 @@
 // Returns an HTML button that executes a specified event
 
 let addEventToggle = function (event, text) {
-	return addButton(`playEvent(events['${event}'])`, text);
+	return addButton(`playEvent('${event}')`, text);
 };
 
 // Player decides whether to pick up an item
@@ -102,8 +102,10 @@ const events = {
 // Activating an event
 
 function playEvent(event) {
+	evtObj = events[event];
+	evtInfo = evtObj.info;
+
 	$info = $('#info');
-	evtInfo = event.info;
 	
 	if(evtInfo.startsWith('-c')) {
 		$info.empty();
@@ -111,7 +113,7 @@ function playEvent(event) {
 	}
 
 	$info.append(evtInfo + '<br><br>');
-	setOptions(event.options);
+	setOptions(evtObj.options);
 }
 
 // Successfully picking up an item
