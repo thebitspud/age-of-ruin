@@ -28,8 +28,5 @@ $(function() { // shorthand for $(document).ready
 	$('#history').append(addHeader('HISTORY'));
 	$('#inspect').append(addHeader('INSPECT'));
 
-	// playEvent('intro-1');
-
-	acquireItem('blunt-dagger');
-	playEvent('forest-3');
+	playEvent('intro-1');
 });
