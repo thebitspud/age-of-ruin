@@ -15,9 +15,9 @@ A list of the things I plan on doing in the future
 
 ## Low Priority
 
-* Implement armor functionality
+* Implement player armor
   * Active item slots
-* Improve mobile useability
+* Improve mobile functionality
 * Switch over event/item/enemy data storage to JSON format
 * Implement local data storage (cookies)
 
@@ -25,5 +25,5 @@ A list of the things I plan on doing in the future
 
 * Add more events and lore
 * Add more enemies and items
-* Optimize and clean up class code
+* Optimize and clean up code
 * Find and fix bugs
