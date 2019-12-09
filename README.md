@@ -1,4 +1,4 @@
-# AGE OF RUIN
+# Age of Ruin
 A fantasy text-based adventure game created using JavaScript and jQuery
 
 Access the newest stable build [here](https://thebitspud.github.io/age-of-ruin/)
