@@ -1,20 +1,21 @@
 # TODO
 A list of the things I plan on doing in the future
 
-## High Priority
+## High Priority (Stuff for next release)
 
+* Add in next section of game events
 * Add in location and history functonality
 * Implement enemy item drops
-* Add in next section of game events
 * Implement item functionality
   * Equip primary/secondary
   * Use consumable
   * Passive item effects
   * Discard item in inventory
+
+## Low Priority (Stuff for later on)
+
 * Add in-combat dialogue
-
-## Low Priority
-
+* Standardize commenting and syntax
 * Implement player armor
   * Active item slots
 * Improve mobile functionality

@@ -65,7 +65,7 @@ const events = {
 
 	'forest-2': {
 		'info': 'You are about to turn around and head for the road when a sudden glint of light in the undergrowth catches your eye.',
-		'options': addEventToggle('forest-3', 'Inspect Area') + addEventToggle('road-0', 'To the Road')
+		'options': addEventToggle('forest-3', 'Investigate') + addEventToggle('road-0', 'To the Road')
 	},
 
 	'forest-3': {
@@ -75,7 +75,7 @@ const events = {
 
 	'forest-4': {
 		'info': '-cA giant shadow swoops in from above.',
-		'options': encounterEnemy('forest-5', 'giant-raven')
+		'options': encounterEnemy('forest-5', 'large-raven')
 	},
 
 	'forest-5': {
@@ -84,18 +84,98 @@ const events = {
 	},
 
 	'road-0': {
-		'info': '-cOccasional bunches of wild grasses starkly contrast the monotonous gravel of the road that surrounds them. In both directions, the winding path streches on as far as you can see.',
-		'options': addEventToggle('e-road-0', 'Turn Left') + addEventToggle('w-road-0', 'Turn Right')
-	},
-
-	'e-road-0': {
-		'info': 'You turn left',
-		'options': addEventToggle('e-road-0', 'Turn Left') + addEventToggle('w-road-0', 'Turn Right')
+		'info': '-cThe monotonous gravel of the road starkly contrasts with the wild grasses that surround it.',
+		'options': addEventToggle('w-road-0', 'Turn Left') + addEventToggle('e-road-0', 'Turn Right')
 	},
 
 	'w-road-0': {
-		'info': 'You turn right',
-		'options': addEventToggle('e-road-0', 'Turn Left') + addEventToggle('w-road-0', 'Turn Right')
+		'info': 'You turn left.',
+		'options': addEventToggle('w-road-1', 'Continue')
+	},
+
+	'w-road-1': {
+		'info': 'The winding road streches on as far as you can see.',
+		'options': addEventToggle('w-road-2', 'Continue')
+	},
+
+	'w-road-2': {
+		'info': 'While walking along the path, you notice a tall stone obelisk off in the distance.',
+		'options': addEventToggle('obelisk-0', 'Investigate') + addEventToggle('w-road-3', 'Ignore')
+	},
+
+	'w-road-3': {
+		'info': 'You ignore the structure and proceed forwards.',
+		'options': addEventToggle('w-road-4', 'Continue')
+	},
+
+	'w-road-4': {
+		'info': '-cAs you walk long the path, you suddenly hear rapid, light footsteps approaching you from behind.',
+		'options': encounterEnemy('w-road-5', 'feral-goblin')
+	},
+
+	'w-road-5': {
+		'info': 'The road slowly tapers off into an unpaved path leading across a mountain range.',
+		'options': encounterEnemy('w-road-5', 'feral-goblin')
+	},
+
+	'obelisk-0': {
+		'info': '-cYou approach the obelisk.',
+		'options': addEventToggle('obelisk-1', 'Continue')
+	},
+
+	'obelisk-1': {
+		'info': 'This monolith has three uniform sides and stands at roughly five times your height. The ground around it is fitted with chunks of smooth rock dotted with patches of moss.',
+		'options': addEventToggle('obelisk-2', 'Continue')
+	},
+
+	'obelisk-2': {
+		'info': 'A barely legible script is etched into the base of the obelisk.',
+		'options': addEventToggle('obelisk-3', 'Read the Text')
+	},
+
+	'obelisk-3': {
+		'info': 'The script reads as follows:<br><em style="color:darkblue">Place a hand upon this stone for a glimpse of coming times</em>',
+		'options': addEventToggle('vision-1', 'Touch it') + addEventToggle('obelisk-4', 'Leave')
+	},
+
+	'obelisk-4': {
+		'info': "You move away from the obelisk and back onto the road.",
+		'options': addEventToggle('w-road-4', 'Continue')
+	},
+
+	'vision-1': {
+		'info': '-cYou place your palm on the obelisk. At once, an overwhelming vision fills your mind.',
+		'options': addEventToggle('vision-2', 'Continue')
+	},
+
+	'vision-2': {
+		'info': "In front of you is a bird's eye view of a well defended fortress city. The settlement is bustling with activity, particularly around the outer wall, but there is a certain unease to the scene.",
+		'options': addEventToggle('vision-3', 'Continue')
+	},
+
+	'vision-3': {
+		'info': "The vision shifts and refocuses. In a huge ring around the citadel, an impossibly large army of hideous creatures has been assembled. From goblin warriors to shade ghouls to gargantuan eldritch horrors,it seems as if every malevolent soul in the realm has been summoned for this final onslaught.",
+		'options': addEventToggle('vision-4', 'Continue')
+	},
+
+	'vision-4': {
+		'info': "You watch helplessly as the horde begins its advance towards the city. Waves of cannonballs, arrows, and magical projectiles rain down upon the beasts but are not enough to turn the tide.",
+		'options': addEventToggle('vision-5', 'Continue')
+	},
+
+	'vision-5': {
+		'info': "Eventually, the mass manages to reach the fortified perimeter. Massive siege machines deployed by the attackers cleave through one section of the wall after another. As the fortress falls, countless fiends pour into the city and devour its citizens alive.",
+		'options': addEventToggle('vision-6', 'Continue')
+	},
+
+	'vision-6': {
+		'info': "Horrified, you snap out of the vision and take your hand off of the obelisk.",
+		'options': addEventToggle('obelisk-4', 'To the Road')
+	},
+
+	'e-road-0': {
+		'info': 'You turn right.',
+		'options': addEventToggle('e-road-1', 'Continue')
 	}
 };
 
