@@ -6,7 +6,8 @@ const items = {
 		'name': 'Berries',
 		'weight': 2,
 		'desc': 'A fistful of edible berries that can be eaten to restore some health.',
-		'effect': '+7 HP over 15s'
+		'effect': '+10 HP',
+		'use': function(){ healPlayer(10) }
 	},
 
 	'blunt-dagger': {
@@ -30,8 +31,9 @@ const items = {
 		'type': 'consumable',
 		'name': 'Healing Salve',
 		'weight': 2,
-		'desc': 'A potent herbal blend that can disinfect and heal lesser wound.',
-		'effect': '+15 HP over 10s'
+		'desc': 'A potent herbal blend that can disinfect and heal lesser wounds.',
+		'effect': '+20 HP',
+		'use': function(){ healPlayer(20) }
 	},
 
 	'small-pack': {
@@ -47,7 +49,7 @@ const items = {
 		'name': 'Talisman of Life',
 		'weight': 3,
 		'desc': 'A golden artifact covered with strange inscriptions. When held, it radiates a pleasant energy.',
-		'effect': '+1 HP every 3s'
+		'effect': '+1 HP/s in combat'
 	},
 };
 
@@ -95,6 +97,31 @@ function acquireItem(item) {
 	displayInventory();
 }
 
+// Using consumables - fix this awful code later
+
+function useItem(item) {
+	let itemObj = items['error'];
+
+	for(let i = 0; i < Object.keys(items).length; i++) {
+		if(Object.keys(items)[i] === item) {
+			itemObj = Object.values(items)[i];
+			break;
+		}
+	}
+
+	for(let i in inventory) {
+		if(inventory[i] === item) {
+			itemObj.use();
+			$('#inspect').empty();
+
+			inventory.splice(i, 1)
+			displayInventory();
+			
+			return;
+		}
+	}
+}
+
 // Displays information about an item in HTML
 
 function inspectItem(item) {
@@ -120,9 +147,19 @@ function inspectItem(item) {
 			$inspect.append(`<br>Attack Damage: ${itemObj.atk_dmg}`);
 			$inspect.append(`<br>Attack Cooldown: ${itemObj.atk_rate.toFixed(1)}s`);
 			break;
-		case 'consumable':
 		case 'accessory':
 			$inspect.append(`<br>Effect: ${itemObj.effect}`)
+			break;
+		case 'consumable':
+			$inspect.append(`<br>Effect: ${itemObj.effect}`)
+
+			for(let i in inventory) {
+				if(inventory[i] === item) {
+					$inspect.append(`<br><br>${addButton(`useItem('${item}')`, 'Use Item')}`)
+					break;
+				}
+			}
+
 			break;
 		case 'equipable':
 			$inspect.append(`<br>Section: ${itemObj.section}`)

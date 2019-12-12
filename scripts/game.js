@@ -28,5 +28,12 @@ $(function() { // shorthand for $(document).ready
 	$('#history').append(addHeader('HISTORY'));
 	$('#inspect').append(addHeader('INSPECT'));
 
+	addEventPack(evts_intro);
+	addEventPack(evts_forest);
+	addEventPack(evts_road);
+	addEventPack(evts_obelisk);
+	addEventPack(evts_vision);
+	addEventPack(evts_mountain);
+
 	playEvent('intro-1');
 });

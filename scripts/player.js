@@ -19,6 +19,11 @@ const player = {
 	'secondary': 'None'
 };
 
+function healPlayer(val) {
+	player.health.now += val;
+	if(player.health.now > player.health.max) player.health.now = player.health.max;
+}
+
 // Displaying current stats in HTML
 
 function displayPlayer() {

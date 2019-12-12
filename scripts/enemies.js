@@ -8,6 +8,15 @@ const enemies = {
 		'desc': 'A savage goblinoid armed with nothing but its filthy claws.'
 	},
 
+	'goblin-thief': {
+		'name': 'Goblin Thief',
+		'health': 50,
+		'atk_dmg': 8,
+		'atk_rate': 1.0,
+		'def': 2,
+		'desc': "A small, wiry goblin wielding a sharp, durable blade."
+	},
+
 	'large-raven': {
 		'name': 'Large Raven',
 		'health': 30,
@@ -24,15 +33,6 @@ const enemies = {
 		'atk_rate': 2.0,
 		'def': 3,
 		'desc': 'A grotesque, batlike creature that lives and hunts in low-light environments.'
-	},
-
-	'goblin-thief': {
-		'name': 'Goblin Thief',
-		'health': 50,
-		'atk_dmg': 8,
-		'atk_rate': 1.0,
-		'def': 2,
-		'desc': "A mischevious goblinoid with a sharp, durable blade."
 	},
 
 	'error': {
