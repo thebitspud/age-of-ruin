@@ -68,8 +68,8 @@ let itemLink = function(item) {
 function displayInventory() {
 	let $inventory = $('#inventory');
 
-	$inventory.empty()
-		.append(addHeader('INVENTORY'));
+	$inventory.empty();
+	$inventory.append(addHeader('INVENTORY'));
 
 	let weight = 0;
 	let backpack = false;

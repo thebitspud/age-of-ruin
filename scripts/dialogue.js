@@ -105,7 +105,7 @@ const evts_road = {
 
 	'w-road-5': {
 		'info': 'The road slowly tapers off into an unpaved trail leading across a mountain range.',
-		'options': addEventToggle('mountain-0', 'Continue Forwards') + addEventToggle('e-road-0', 'Turn Back')
+		'options': addEventToggle('mountain-0', 'Continue Forwards') + addEventToggle('e-road-0a', 'Turn Back')
 	},
 
 	'e-road-0': {
@@ -113,8 +113,18 @@ const evts_road = {
 		'options': addEventToggle('e-road-1', 'Continue')
 	},
 
+	'e-road-0a': {
+		'info': '-cYou decide to turn around and walk back in the direction you came from. You pass by the obelisk and the clearing in which you woke up.',
+		'options': addEventToggle('e-road-1', 'Continue')
+	},
+
+	'e-road-0b': {
+		'info': '-cYou decide to turn around and walk back in the direction you came from. Eventually, you manage to move back onto the road, pass by the obelisk, and cross the clearing in you woke up in.',
+		'options': addEventToggle('e-road-1', 'Continue')
+	},
+
 	'e-road-1': {
-		'info': 'As you walk along the road, ',
+		'info': 'As you stroll along, you notice a figure down on the same road walking in your direction.',
 		'options': addEventToggle('e-road-2', 'Continue')
 	}
 }
@@ -186,7 +196,7 @@ const evts_mountain = {
 
 	'mountain-1': {
 		'info': "The trail is long and rugged. With no end point in sight, you decide to rest and collect your thoughts.",
-		'options': addEventToggle('mountain-2', 'Inspect Area') + addEventToggle('mountain-3', 'Continue Forwards') + addEventToggle('e-road-0', 'Turn Back')
+		'options': addEventToggle('mountain-2', 'Inspect Area') + addEventToggle('mountain-3', 'Continue Forwards') + addEventToggle('e-road-0b', 'Turn Back')
 	},
 
 	'mountain-2': {

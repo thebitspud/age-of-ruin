@@ -25,7 +25,7 @@ function setOptions(args) {
 $(function() { // shorthand for $(document).ready
 	displayPlayer();
 	displayInventory();
-	$('#history').append(addHeader('HISTORY'));
+	$('#quests').append(addHeader('QUESTS'));
 	$('#inspect').append(addHeader('INSPECT'));
 
 	addEventPack(evts_intro);

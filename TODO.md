@@ -4,7 +4,7 @@ A list of the things I plan on doing in the future
 ## High Priority (Stuff for next release)
 
 * Add in next section of game events
-* Add in location and history functonality
+* Add in quest functionality
 * Implement enemy item drops
 * Implement item functionality
   * Equip primary/secondary
