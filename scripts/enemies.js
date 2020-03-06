@@ -23,7 +23,7 @@ const enemies = {
 		'atk_dmg': 4,
 		'atk_rate': 2.0,
 		'def': 1,
-		'desc': 'A mean looking bird with surprisingly powerful talons.'
+		'desc': 'A mean looking bird with powerful talons.'
 	},
 
 	'nightstalker': {

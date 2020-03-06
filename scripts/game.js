@@ -35,5 +35,5 @@ $(function() { // shorthand for $(document).ready
 	addEventPack(evts_vision);
 	addEventPack(evts_mountain);
 
-	playEvent('intro-1');
+	playEvent('intro-0');
 });

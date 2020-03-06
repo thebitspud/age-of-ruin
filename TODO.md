@@ -7,7 +7,6 @@ A list of the things I plan on doing in the future
 * Implement enemy item drops
 * Implement item functionality
   * Equip primary/secondary
-  * Use consumable
   * Passive item effects
   * Discard item in inventory
 

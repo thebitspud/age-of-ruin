@@ -79,7 +79,7 @@ const evts_road = {
 	},
 
 	'w-road-1': {
-		'info': 'The winding road streches on as far as you can see.',
+		'info': 'The winding road stretches on as far as you can see.',
 		'options': addEventToggle('w-road-2', 'Continue')
 	},
 
@@ -94,13 +94,13 @@ const evts_road = {
 	},
 
 	'w-road-4': {
-		'info': '-cYou suddenly hear light footsteps approaching from behind.',
+		'info': '-cYou hear light footsteps approaching from behind.',
 		'options': encounterEnemy('w-road-5', 'feral-goblin')
 	},
 
 	'w-road-5': {
 		'info': 'The road slowly tapers off into an unpaved trail leading across a mountain range.',
-		'options': addEventToggle('mountain-0', 'Continue Forwards') + addEventToggle('e-road-0a', 'Turn Back')
+		'options': addEventToggle('mountain-0', 'Continue Forward') + addEventToggle('e-road-0a', 'Turn Back')
 	},
 
 	'e-road-0': {
@@ -146,7 +146,7 @@ const evts_obelisk = {
 	},
 
 	'obelisk-4': {
-		'info': "You move away from the obelisk and back onto the road.",
+		'info': "-cYou move away from the obelisk and back onto the road.",
 		'options': addEventToggle('w-road-4', 'Continue')
 	}
 }
@@ -205,12 +205,12 @@ const evts_mountain = {
 	},
 
 	'mountain-4': {
-		'info': "As you continue forwards, you begin to suspect that someone or something is watching you.",
+		'info': "As you continue forward, you begin to suspect that someone or something is watching you.",
 		'options': addEventToggle('mountain-5', 'Continue')
 	},
 
 	'mountain-5': {
-		'info': "-cYou suddenly hear light footsteps approaching from behind.",
+		'info': "-cYou hear light footsteps approaching from behind.",
 		'options': encounterEnemy('mountain-5', 'feral-goblin')
 	}
 }

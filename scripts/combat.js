@@ -102,8 +102,8 @@ function combatWin() {
 }
 
 function combatLoss() {
-	player.health = 0;
+	player.health.now = 0;
 	clearInterval(enemyAttackTimer);
-	$('#info').empty().append('Player has died.');
+	$('#info').empty().append('Player has died. Refresh the page to restart.');
 	$('#options').empty();
 }
