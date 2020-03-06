@@ -1,10 +1,9 @@
 # TODO
 A list of the things I plan on doing in the future
 
-## High Priority (Stuff for next release)
+## High Priority (Stuff for next few releases)
 
-* Add in next section of game events
-* Add in quest functionality
+* Add in questing functionality
 * Implement enemy item drops
 * Implement item functionality
   * Equip primary/secondary

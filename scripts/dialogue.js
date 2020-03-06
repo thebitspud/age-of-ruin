@@ -5,36 +5,31 @@ const evts_intro = {
 	},
 
 	'intro-1': {
-		'info': `Though the ground you lie on is cold and uneven, you can't help but admire the countless stars above dotting the clear night sky.`,
+		'info': "Though the ground you lie on is cold and uneven, you can't help but admire the countless stars dotting the clear night sky.",
 		'options': addEventToggle('intro-2', 'Continue')
 	},
 
 	'intro-2': {
-		'info': 'You sit up and look around, surveying the unfamiliar landscape.',
+		'info': 'After a while, you sit up and survey the unfamiliar landscape. It is still dark out, but the light of dawn grows brighter in the distance.',
 		'options': addEventToggle('intro-3', 'Continue')
 	},
 
 	'intro-3': {
-		'info': 'You can barely see the light of dawn off in the distance. It is still dark out, but you can tell that you are in an unkempt grassy field.',
+		'info': 'You can tell that you are in an unkempt grassy clearing. You have no idea how you got here.',
 		'options': addEventToggle('intro-4', 'Continue')
 	},
 
 	'intro-4': {
-		'info': 'You do not know where you are or how you got here.',
-		'options': addEventToggle('intro-5', 'Inspect Area')
+		'info': 'A small, metallic object in the grass catches your eye.',
+		'options': addButton(`inspectItem('blunt-dagger')`, 'Inspect') + addButton(`pickUpSuccess('intro-5', 'blunt-dagger')`, 'Pick Up')
 	},
 
 	'intro-5': {
-		'info': 'You spot a small dagger lying on the ground.',
-		'options': addButton(`inspectItem('blunt-dagger')`, 'Inspect') + addButton(`pickUpSuccess('intro-6', 'blunt-dagger')`, 'Pick Up')
+		'info': 'There appears to be nothing else of value in the region.',
+		'options': addEventToggle('intro-6', 'Continue')
 	},
 
 	'intro-6': {
-		'info': 'There appears to be nothing else of value in the region.',
-		'options': addEventToggle('intro-7', 'Continue')
-	},
-
-	'intro-7': {
 		'info': 'Moving out of this area would be a good idea. Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
 		'options': addEventToggle('forest-0', 'To the Forest') + addEventToggle('road-0', 'To the Road')
 	}
@@ -47,7 +42,7 @@ const evts_forest = {
 	},
 
 	'forest-1': {
-		'info': 'Along the edge of the forest, you spot some bright red berries growing on a nearby shrub.',
+		'info': 'Along the forest edge, you spot some bright red berries growing on a shrub.',
 		'options': pickUpItemPrompt('forest-2', 'berries')
 	},
 
@@ -119,12 +114,12 @@ const evts_road = {
 	},
 
 	'e-road-0b': {
-		'info': '-cYou decide to turn around and walk back in the direction you came from. Eventually, you manage to move back onto the road, pass by the obelisk, and cross the clearing in you woke up in.',
+		'info': '-cYou decide to turn around and walk back in the direction you came from. Eventually, you move back onto the road, pass by the obelisk, and cross the clearing in which you woke up.',
 		'options': addEventToggle('e-road-1', 'Continue')
 	},
 
 	'e-road-1': {
-		'info': 'As you stroll along, you notice a figure down on the same road walking in your direction.',
+		'info': 'As you stroll along, you spot a figure in the distance walking in your direction.',
 		'options': addEventToggle('e-road-2', 'Continue')
 	}
 }
@@ -136,7 +131,7 @@ const evts_obelisk = {
 	},
 
 	'obelisk-1': {
-		'info': 'This monolith has three uniform sides and stands at roughly five times your height. The ground around it is fitted with chunks of smooth rock dotted with patches of moss.',
+		'info': 'This monolith has three uniform sides and stands at roughly five times your height. The ground around it is fitted with smooth chunks of rock dotted with patches of moss.',
 		'options': addEventToggle('obelisk-2', 'Continue')
 	},
 
@@ -163,27 +158,27 @@ const evts_vision = {
 	},
 
 	'vision-2': {
-		'info': "In front of you is a bird's eye view of a well defended fortress city. The settlement is bustling with activity, particularly around the outer wall, but there is a certain unease to the scene.",
+		'info': "In front of you is a bird's eye view of a fortress city. The settlement is bustling with activity, particularly around the outer wall, but there is a certain unease to the scene.",
 		'options': addEventToggle('vision-3', 'Continue')
 	},
 
 	'vision-3': {
-		'info': "The vision shifts and refocuses. In a huge ring around the citadel, an impossibly large army of hideous creatures has been assembled. It seems as if every single malevolent soul in the realm has been summoned for this final onslaught.",
+		'info': "The vision shifts and refocuses. In a huge ring surrounding the city, an impossibly large army of hideous creatures has been assembled. Goblinoid and orcish warriors make up the plurality, but there are other things in there. Things that should not exist in this world.",
 		'options': addEventToggle('vision-4', 'Continue')
 	},
 
 	'vision-4': {
-		'info': "You watch helplessly as the horde begins its advance towards the city. Waves of cannonballs, arrows, and magical projectiles rain down upon the beasts, but they are not enough to turn the tide.",
+		'info': "As one, they advance towards the city. Waves of arrows and magical projectiles rain down on the horde, but the stampede continues unhindered.",
 		'options': addEventToggle('vision-5', 'Continue')
 	},
 
 	'vision-5': {
-		'info': "Eventually, the mass manages to reach the fortified perimeter. Massive siege machines deployed by the attackers cleave through the wall with ease. As the fortress falls, countless fiends pour into the city, devouring its citizens alive.",
+		'info': "The horde reaches the fortified perimeter, overwhelming the defenders with ease. As the outer wall collapses, countless terrors pour through and devour the city's inhabitants alive.",
 		'options': addEventToggle('vision-6', 'Continue')
 	},
 
 	'vision-6': {
-		'info': "Horrified, you snap out of the vision and take your hand off of the obelisk.",
+		'info': "Horrified, you snap out of the vision and remove your hand from the obelisk.",
 		'options': addEventToggle('obelisk-4', 'To the Road')
 	}
 }
@@ -196,7 +191,7 @@ const evts_mountain = {
 
 	'mountain-1': {
 		'info': "The trail is long and rugged. With no end point in sight, you decide to rest and collect your thoughts.",
-		'options': addEventToggle('mountain-2', 'Inspect Area') + addEventToggle('mountain-3', 'Continue Forwards') + addEventToggle('e-road-0b', 'Turn Back')
+		'options': addEventToggle('mountain-2', 'Inspect Area') + addEventToggle('mountain-3', 'Continue Forward') + addEventToggle('e-road-0b', 'Turn Back')
 	},
 
 	'mountain-2': {
@@ -206,7 +201,7 @@ const evts_mountain = {
 
 	'mountain-3': {
 		'info': "There appears to be nothing else of value in the region.",
-		'options': addEventToggle('mountain-4', 'Continue Forwards') + addEventToggle('e-road-0', 'Turn Back')
+		'options': addEventToggle('mountain-4', 'Continue Forward') + addEventToggle('e-road-0', 'Turn Back')
 	},
 
 	'mountain-4': {
