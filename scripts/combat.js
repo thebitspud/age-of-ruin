@@ -102,7 +102,7 @@ function combatWin() {
 }
 
 function combatLoss() {
-	player.health = 0;
+	player.health.now = 0;
 	clearInterval(enemyAttackTimer);
 	$('#info').empty().append('Player has died.');
 	$('#options').empty();
