@@ -5,7 +5,8 @@ const enemies = {
 		'atk_dmg': 3,
 		'atk_rate': 1.0,
 		'def': 1,
-		'desc': 'A savage goblinoid armed with nothing but its filthy claws.'
+		'desc': 'A savage goblinoid armed with nothing but its filthy claws.',
+		'drops': ['filthy-cloth']
 	},
 
 	'goblin-thief': {
@@ -14,7 +15,8 @@ const enemies = {
 		'atk_dmg': 8,
 		'atk_rate': 1.0,
 		'def': 2,
-		'desc': "A small, wiry goblin wielding a sharp, durable blade."
+		'desc': "A small, wiry goblin wielding a sharp, durable blade.",
+		'drops': ['sharp-dagger']
 	},
 
 	'large-raven': {
@@ -23,7 +25,8 @@ const enemies = {
 		'atk_dmg': 4,
 		'atk_rate': 2.0,
 		'def': 1,
-		'desc': 'A mean looking bird with powerful talons.'
+		'desc': 'A mean looking bird with powerful talons.',
+		'drops': ['raven-feather']
 	},
 
 	'nightstalker': {
@@ -32,7 +35,8 @@ const enemies = {
 		'atk_dmg': 15,
 		'atk_rate': 2.0,
 		'def': 3,
-		'desc': 'A grotesque, batlike creature that lives and hunts in low-light environments.'
+		'desc': 'A grotesque, batlike creature that lives and hunts in low-light environments.',
+		'drops': []
 	},
 
 	'error': {
@@ -40,7 +44,8 @@ const enemies = {
 		'atk_dmg': 0,
 		'atk_rate': 0,
 		'def': 0,
-		'desc': 'That enemy could not be found. Please report this issue to <a href="https://github.com/thebitspud/age-of-ruin/issues" target="_blank" rel="noopener">the developer</a>.'
+		'desc': 'That enemy could not be found. Please report this issue to <a href="https://github.com/thebitspud/age-of-ruin/issues" target="_blank" rel="noopener">the developer</a>.',
+		'drops': []
 	}
 }
 
@@ -96,6 +101,13 @@ function enemyPrompt(event, enemy) {
 }
 
 function inspectEnemyDrops() {
-	$('#info').empty().append(`${enemyLink(activeEnemy.title)} did not drop anything. <br><br>`);
+	let $info = $('#info');
+	$info.empty();
+
+	for(let i in activeEnemy.drops) {
+		
+	}
+
+	$info.append(`${enemyLink(activeEnemy.title)} did not drop anything. <br><br>`);
 	setOptions(addEventToggle(nextEvent, 'Continue'));
 }

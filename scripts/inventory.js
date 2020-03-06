@@ -27,6 +27,23 @@ const items = {
 		'desc': "That item could not be accessed. Please report this issue to <a href='https://github.com/thebitspud/age-of-ruin/issues' target='_blank' rel='noopener'>the developer</a>."
 	},
 
+	'filthy-cloth': {
+		'type': 'artifact',
+		'name': 'Filthy Cloth',
+		'weight': 1,
+		'desc': 'A tattered fabric looted from a feral goblin.'
+	},
+	
+	'goblin-dagger': {
+		'type': 'weapon',
+		'name': 'Goblin Dagger',
+		'weight': 3,
+		'desc': "A small dagger with a serrated edge. It was once the prized possession of a goblin thief.",
+		'atk_dmg': 10,
+		'atk_rate': 1.0,
+		'size': 'secondary'
+	},
+
 	'heal-salve': {
 		'type': 'consumable',
 		'name': 'Healing Salve',
@@ -34,6 +51,13 @@ const items = {
 		'desc': 'A potent herbal blend that can disinfect and heal lesser wounds.',
 		'effect': '+20 HP',
 		'use': function(){ healPlayer(20) }
+	},
+
+	'raven-feather': {
+		'type': 'artifact',
+		'name': 'Raven Feather',
+		'weight': 1,
+		'desc': 'A fancy feather dropped by a raven.'
 	},
 
 	'small-pack': {

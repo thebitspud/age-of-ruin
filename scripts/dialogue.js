@@ -211,6 +211,6 @@ const evts_mountain = {
 
 	'mountain-5': {
 		'info': "-cYou hear light footsteps approaching from behind.",
-		'options': encounterEnemy('mountain-5', 'feral-goblin')
+		'options': encounterEnemy('mountain-5', 'goblin-thief')
 	}
 }
