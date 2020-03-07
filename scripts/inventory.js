@@ -115,8 +115,9 @@ function acquireItem(item) {
 	itemObj = items[item];
 	if(itemObj.weight + player.weight.now > player.weight.max) return;
 	if(player.primary === 'None' && itemObj.type === 'weapon') player.primary = item;
+	else if (player.secondary === 'None' && itemObj.type === 'weapon') player.secondary = item;
+	else inventory.push(item);
 
-	inventory.push(item);
 	$('#info').append(`Acquired ${itemLink(item)}<br><br>`);
 	displayInventory();
 }

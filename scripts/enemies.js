@@ -16,7 +16,7 @@ const enemies = {
 		'atk_rate': 1.0,
 		'def': 2,
 		'desc': "A small, wiry goblin wielding a sharp, durable blade.",
-		'drops': ['sharp-dagger']
+		'drops': ['goblin-dagger']
 	},
 
 	'large-raven': {
@@ -36,7 +36,7 @@ const enemies = {
 		'atk_rate': 2.0,
 		'def': 3,
 		'desc': 'A grotesque, batlike creature that lives and hunts in low-light environments.',
-		'drops': []
+		'drops': ['heal-salve']
 	},
 
 	'error': {
@@ -45,7 +45,6 @@ const enemies = {
 		'atk_rate': 0,
 		'def': 0,
 		'desc': 'That enemy could not be found. Please report this issue to <a href="https://github.com/thebitspud/age-of-ruin/issues" target="_blank" rel="noopener">the developer</a>.',
-		'drops': []
 	}
 }
 
@@ -63,14 +62,7 @@ let activeEnemy = {
 let nextEvent = "";
 
 function inspectEnemy(enemy) {
-	let enemyObj = enemies['error'];
-
-	for(let i = 0; i < Object.keys(enemies).length; i++) {
-		if(Object.keys(enemies)[i] === enemy) {
-			enemyObj = Object.values(enemies)[i];
-			break;
-		}
-	}
+	let enemyObj = enemies[activeEnemy.title];
 
 	$inspect = $('#inspect');
 
@@ -101,13 +93,13 @@ function enemyPrompt(event, enemy) {
 }
 
 function inspectEnemyDrops() {
-	let $info = $('#info');
-	$info.empty();
+	$('#info').empty();
+	$('#options').empty();
 
-	for(let i in activeEnemy.drops) {
-		
+	// $('#info').append(`${enemyLink(activeEnemy.title)} did not drop anything. <br><br>`);
+	for(let i in enemies[activeEnemy.title].drops) {
+		let drop = enemies[activeEnemy.title].drops[i];
+		$('#info').append(`${enemyLink(activeEnemy.title)} dropped ${itemLink(drop)}<br><br>`);
+		setOptions(pickUpItemPrompt(nextEvent, drop));
 	}
-
-	$info.append(`${enemyLink(activeEnemy.title)} did not drop anything. <br><br>`);
-	setOptions(addEventToggle(nextEvent, 'Continue'));
 }
