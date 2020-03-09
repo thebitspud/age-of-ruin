@@ -1,4 +1,4 @@
-// A preconstructed list of all the obtainable items in the game
+// A preconstructed list of all obtainable items in the game
 
 const items = {
 	'berries': {
@@ -118,11 +118,27 @@ function acquireItem(item) {
 	else if (player.secondary === 'None' && itemObj.type === 'weapon') player.secondary = item;
 	else inventory.push(item);
 
-	$('#info').append(`Acquired ${itemLink(item)}<br><br>`);
+	$('#info').append(`<span style="color: navy">Acquired</span> ${itemLink(item)}<br><br>`);
 	displayInventory();
 }
 
-// Using consumables - fix this awful code later
+// Removing items from the player's inventory
+
+function discardItem(item) {
+	for(let i in inventory) {
+		if(inventory[i] === item) {
+			inventory.splice(i, 1)
+			displayInventory();
+			inspectItem(item)
+
+			$('#info').append(`<span style="color: navy">Discarded</span> ${itemLink(item)}<br><br>`);
+
+			return;
+		}
+	}
+}
+
+// Using consumables (I'm sure I can make this more efficient)
 
 function useItem(item) {
 	let itemObj = items['error'];
@@ -137,10 +153,12 @@ function useItem(item) {
 	for(let i in inventory) {
 		if(inventory[i] === item) {
 			itemObj.use();
-			$('#inspect').empty();
 
 			inventory.splice(i, 1)
 			displayInventory();
+			inspectItem(item)
+
+			$('#info').append(`<span style="color: navy">Used</span> ${itemLink(item)}<br><br>`);
 			
 			return;
 		}
@@ -150,6 +168,8 @@ function useItem(item) {
 // Displays information about an item in HTML
 
 function inspectItem(item) {
+	// Retrieving item data
+
 	let itemObj = items['error'];
 
 	for(let i = 0; i < Object.keys(items).length; i++) {
@@ -159,13 +179,25 @@ function inspectItem(item) {
 		}
 	}
 
+	// Checking the player's inventory for the item
+
+	let invenContains = false;
+
+	for(let i in inventory)
+		if(inventory[i] === item)
+			invenContains = true;
+
+	// Displaying the item's universal data in HTML
+
 	$inspect = $('#inspect');
 
 	$inspect.empty()
 		.append(addHeader('INSPECT'))
-		.append(`<p style="color: green; text-align: center">${itemObj.name}</p>`)
+		.append(`<p style="color: green; text-align: center; text-transform: capitalize">${itemObj.name} (${itemObj.type})</p>`)
 		.append(`<br>${itemObj.desc}`)
 		.append(`<br><br>Weight: ${itemObj.weight}`);
+
+	// Displaying the item's type-specific data
 
 	switch(itemObj.type) {
 		case 'weapon':
@@ -178,16 +210,20 @@ function inspectItem(item) {
 		case 'consumable':
 			$inspect.append(`<br>Effect: ${itemObj.effect}`)
 
-			for(let i in inventory) {
-				if(inventory[i] === item) {
-					$inspect.append(`<br><br>${addButton(`useItem('${item}')`, 'Use Item')}`)
-					break;
-				}
-			}
+			// Adding a use item button for consumables in the player's inventory
+			if(invenContains)
+				$inspect.append(`<br><br>${addButton(`useItem('${item}')`, 'Use Item')}`)
 
 			break;
 		case 'equipable':
 			$inspect.append(`<br>Section: ${itemObj.section}`)
 			break;
+	}
+
+	// Allowing players to discard unwanted items
+
+	if(invenContains) {
+		if(itemObj.type !== 'consumable') $inspect.append('<br><br>');
+		$inspect.append(`${addButton(`discardItem('${item}')`, 'Discard')}`);
 	}
 }

@@ -19,6 +19,8 @@ const player = {
 	'secondary': 'None'
 };
 
+// Use an item to heal the player for a specified amount
+
 function healPlayer(val) {
 	player.health.now += val;
 	if(player.health.now > player.health.max) player.health.now = player.health.max;

@@ -10,6 +10,8 @@ let addButton = function(args, text) {
 	return `<button class="option" onclick="${args}">${text}</button>`;
 };
 
+// Returns an HTML button with the specified parameters
+
 let addIDButton = function(id, args, text) {
 	return `<button id="${id}" class="option" onclick="${args}">${text}</button>`;
 };

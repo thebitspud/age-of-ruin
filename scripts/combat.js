@@ -1,6 +1,10 @@
 /* COMBAT SYSTEM */
 
+// Timer that tracks enemy attack cooldowns
+
 let enemyAttackTimer;
+
+// Initiates combat between the player and a predetermined enemy
 
 function beginCombat() {
 	$('#info').append('Battle started!<div id="enemy"></div>');
@@ -19,6 +23,8 @@ function beginCombat() {
 	$options.append('<br><br>' + addButton(`playerSurrender()`, 'Surrender') + addButton(`playerFlee()`, 'Flee'));
 }
 
+// Displays and updates the active enemy in a <div>
+
 function displayEnemy() {
 	$enemy = $('#enemy');
 	enemyObj = enemies[activeEnemy.title];
@@ -31,6 +37,8 @@ function displayEnemy() {
 }
 
 /* PLAYER ACTIONS */
+
+// Use the player's currently equipped primary weapon
 
 function playerUsePrimary() {
 	$("#primary").attr("disabled", true);
@@ -45,6 +53,8 @@ function playerUsePrimary() {
 	setTimeout(function() { $("#primary").attr("disabled", false); }, cooldown);
 }
 
+// Use the player's currently equipped secondary weapon
+
 function playerUseSecondary() {
 	$("#secondary").attr("disabled", true);
 
@@ -58,11 +68,15 @@ function playerUseSecondary() {
 	setTimeout(function() { $("#secondary").attr("disabled", false); }, cooldown);
 }
 
+// Surrender to the enemy (functionally identical to fleeing for now)
+
 function playerSurrender() {
 	clearInterval(enemyAttackTimer);
 	$('#info').empty().append(`${enemyLink(activeEnemy.title)} lost interest and left.<br><br>`);
 	setOptions(addEventToggle(nextEvent, 'Continue'));
 }
+
+// Surrender to the enemy (ends combat without rewards)
 
 function playerFlee() {
 	clearInterval(enemyAttackTimer);
@@ -71,6 +85,8 @@ function playerFlee() {
 }
 
 /* ENEMY ACTIONS */
+
+// Deal damage to the player each time the attack cooldown refreshes
 
 function enemyAttack() {
 	damageDealt = enemies[activeEnemy.title].atk_dmg - player.def;
@@ -82,6 +98,8 @@ function enemyAttack() {
 	displayPlayer();
 }
 
+/* WIN/LOSS CONDITIONS */
+
 function enemySurrender() {
 	clearInterval(enemyAttackTimer);
 	// Unused
@@ -92,7 +110,7 @@ function enemyFlee() {
 	// Unused
 }
 
-/* WIN/LOSS CONDITIONS */
+// The active enemy takes fatal damage (ends combat with rewards)
 
 function combatWin() {
 	activeEnemy.health = 0;
@@ -100,6 +118,8 @@ function combatWin() {
 	$('#info').append(`${enemyLink(activeEnemy.title)} has been defeated in combat.<br><br>`);
 	setOptions(addButton('inspectEnemyDrops()', 'Inspect Drops'));
 }
+
+// The player takes fatal damage (ends game)
 
 function combatLoss() {
 	player.health.now = 0;

@@ -4,11 +4,10 @@ A list of the things I plan on doing in the future
 ## High Priority (Stuff for next few releases)
 
 * Add in questing functionality
-* Implement enemy item drops
-* Implement item functionality
+* Multiple item drops from a single enemy
+* Add additional item functionality
   * Equip primary/secondary
   * Passive item effects
-  * Discard item in inventory
 
 ## Low Priority (Stuff for later on)
 

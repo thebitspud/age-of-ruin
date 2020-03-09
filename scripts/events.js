@@ -7,7 +7,7 @@ let addEventToggle = function (event, text) {
 // Player decides whether to pick up an item
 
 let pickUpItemPrompt = function(event, item) {
-	return addButton(`inspectItem('${item}')`, 'Inspect') + addButton(`pickUpSuccess('${event}', '${item}')`, 'Pick Up') + addButton(`discardItem('${event}', '${item}')`, 'Discard');
+	return addButton(`inspectItem('${item}')`, 'Inspect') + addButton(`pickUpSuccess('${event}', '${item}')`, 'Pick Up') + addButton(`pickUpDecline('${event}', '${item}')`, 'Discard');
 }
 
 // All event messages are stored in dialogue.js
@@ -46,7 +46,7 @@ function pickUpSuccess(event, item) {
 
 // Discarding an item
 
-function discardItem(event, item) {
-	$('#info').append(`<span style="color: red">Discarded</span> ${itemLink(item)}<br><br>`);
+function pickUpDecline(event, item) {
+	$('#info').append(`<span style="color: navy">Discarded</span> ${itemLink(item)}<br><br>`);
 	setOptions(addEventToggle(event, 'Continue'));
 }

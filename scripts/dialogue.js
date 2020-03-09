@@ -1,3 +1,5 @@
+// Game events sorted into individually loadable object lists
+
 const evts_intro = {
 	'intro-0': {
 		'info': '-cYou wake up and open your eyes.',
@@ -25,12 +27,12 @@ const evts_intro = {
 	},
 
 	'intro-5': {
-		'info': 'There appears to be nothing else of value in the region.',
+		'info': 'There appears to be nothing else of interest here. Moving out of this area would be a good idea. ',
 		'options': addEventToggle('intro-6', 'Continue')
 	},
 
 	'intro-6': {
-		'info': 'Moving out of this area would be a good idea. Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
+		'info': 'Behind you is a towering forest, but in the opposite direction you spot what appears to be a well used road.',
 		'options': addEventToggle('forest-0', 'To the Forest') + addEventToggle('road-0', 'To the Road')
 	}
 }
@@ -62,7 +64,7 @@ const evts_forest = {
 	},
 
 	'forest-5': {
-		'info': 'There appears to be nothing else of value in the region.',
+		'info': 'There appears to be nothing else of interest here.',
 		'options': addEventToggle('road-0', 'To the Road')
 	}
 }
@@ -190,18 +192,20 @@ const evts_mountain = {
 	},
 
 	'mountain-1': {
-		'info': "The trail is long and rugged. With no end point in sight, you decide to rest and collect your thoughts.",
-		'options': addEventToggle('mountain-2', 'Inspect Area') + addEventToggle('mountain-3', 'Continue Forward') + addEventToggle('e-road-0b', 'Turn Back')
+		'info': "The trail abruptly ends at a fast-flowing river. Without assistance, attempting to cross would be suicidal.",
+		'options': addEventToggle('mountain-2', 'Inspect Area') + addEventToggle('e-road-0b', 'Turn Back')
+		// addEventToggle('mountain-4', 'Continue Forward')
 	},
 
 	'mountain-2': {
-		'info': "You notice some wild berries growing on a bush not far from the trail.",
+		'info': "You spot some red berries growing on a bush near the water.",
 		'options': pickUpItemPrompt('mountain-3', 'berries')
 	},
 
 	'mountain-3': {
-		'info': "There appears to be nothing else of value in the region.",
-		'options': addEventToggle('mountain-4', 'Continue Forward') + addEventToggle('e-road-0', 'Turn Back')
+		'info': "There appears to be nothing else of interest here.",
+		'options': addEventToggle('e-road-0b', 'Turn Back')
+		// addEventToggle('mountain-4', 'Continue Forward')
 	},
 
 	'mountain-4': {
